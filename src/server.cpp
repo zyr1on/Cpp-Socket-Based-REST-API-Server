@@ -1,6 +1,7 @@
 #include "HttpRouter.h"
 #include <ws2tcpip.h>
 #include <jwt-cpp/jwt.h>
+#include "HttpParser.h"
 
 #pragma commenct(lib, "ws2_32.lib")
 
@@ -8,10 +9,12 @@ SOCKET initSocket();
 constexpr auto stringNotFound = std::string::npos;
 
 HttpRouter router;
+ParsedRequest parsedReq;
 
-int main(int argc, char const *argv[])
+int main(void)
 {
     SOCKET server_fd = initSocket();
+
     while (true)
     {
         SOCKET client_socket = accept(server_fd, NULL, NULL);
@@ -25,13 +28,9 @@ int main(int argc, char const *argv[])
         if (valread > 0)
         {
             std::string request(buffer, valread); // comes from client to server with recv()
+            HttpParser::parseRequest(request,parsedReq);
 
-            size_t firtSpace = request.find(' ');
-            size_t secondSpace = request.find(' ', firtSpace + 1);
-
-            std::string path = request.substr(firtSpace + 1, secondSpace - (firtSpace + 1));
-            std::string method = request.substr(0, firtSpace);
-            std::string last = method + " " + path;
+            std::string last = parsedReq.method + " " + parsedReq.path;
             std::cout << last << std::endl;
 
             router.handleRequst(client_socket, last);
@@ -41,7 +40,7 @@ int main(int argc, char const *argv[])
 
     closesocket(server_fd);
     WSACleanup();
-
+ 
     return 0;
 }
 
