@@ -78,6 +78,6 @@ SOCKET initSocket() {
         WSACleanup();
         return 1;
     }
-    std::cout << "Server woke up at: http://localhost:" << PORT << \n";
+    std::cout << "Server woke up at: http://localhost:" << PORT << '\n';
     return server_fd;
 }
