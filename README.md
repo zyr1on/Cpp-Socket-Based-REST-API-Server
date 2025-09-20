@@ -1,6 +1,23 @@
 # C++ Socket-Based REST API Server
 
+> ⚠️ **Work in Progress** - This project is currently under active development. Features may be incomplete or subject to change.
+
 A lightweight, high-performance REST API server built from scratch using native C++ sockets, featuring JWT authentication, custom routing, and modern C++ patterns.
+
+## 🚧 Development Status
+
+- ✅ **Core Socket Server** - Basic HTTP handling implemented
+- ✅ **Routing System** - Function-based routing with unordered_map
+- 🔄 **JWT Authentication** - Currently implementing token validation
+- 🔄 **Request Parser** - HTTP parsing optimization in progress  
+- ⏳ **Response Builder** - Standard HTTP responses
+- ⏳ **Error Handling** - Comprehensive error management
+- ⏳ **Unit Tests** - Test suite development
+- ⏳ **Documentation** - API documentation
+
+**Current Version:** `v0.1.0-alpha`
+
+---
 
 ## Features
 
